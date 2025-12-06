@@ -38,3 +38,16 @@ class TestApiClient(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertEqual(response.json()["title"], "LAB Room")
 
+    @patch("src.api_client.requests.get")
+    def test_get_room_details_not_found(self, mock_get):
+        # Mock zwróci odpowiedź 404
+        mock_get.return_value.status_code = 404
+
+        api = ApiClient("dummy")
+        response = api.get_room_details("non-existing-room")
+
+        # Sprawdzenie, czy metoda poprawnie zwróciła 404
+        self.assertEqual(response.status_code, 404)
+
+
+
