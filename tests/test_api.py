@@ -18,7 +18,7 @@ class TestApiClient(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"items": []})
     
-  @patch("src.api_client.requests.get")
+    @patch("src.api_client.requests.get")
     def test_list_rooms_unauthorized(self, mock_get):
         mock_get.return_value.status_code = 401
 
